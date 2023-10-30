@@ -10,10 +10,29 @@ export class AppComponent {
   @ViewChild('form') signUpForm: NgForm;
   defaultQuestion: string = 'teacher';
   answer: string = "";
-  genders = ['male', 'female'];
+  genders = ['Male', 'Female'];
 
   suggestUserName() {
     const suggestedName = 'Superuser';
+
+    //1. This changes the entire userData object when the button is clicked. setValue is also for resetting all the values in the form
+/*    this.signUpForm.setValue({
+      userData: {
+        username: suggestedName,
+        email: ""
+      },
+      secret: "pet",
+      questionAnswer: "",
+      gender: "Male"
+    })*/
+
+
+    //2. This only adds username field with the suggest name button is clicked. patchValue is used for one or more properties but not entire form
+    this.signUpForm.form.patchValue({
+      userData: {
+        username: suggestedName
+      }
+    })
   }
 
   onSubmit(form: NgForm) {
